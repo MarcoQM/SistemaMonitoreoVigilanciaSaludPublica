@@ -47,6 +47,7 @@ public class Principal extends javax.swing.JFrame {
         initComponents();
         this.setTitle("Sistema de Monitoreo de Vigilancia de Salud Pública");
         this.setLocationRelativeTo(Principal.this);
+        setExtendedState(MAXIMIZED_BOTH);
         //this.setResizable(false);
         //this.setExtendedState(Principal.MAXIMIZED_BOTH);
         //consultData();
@@ -139,43 +140,46 @@ public class Principal extends javax.swing.JFrame {
         TableroPanel.setMinimumSize(new java.awt.Dimension(1510, 750));
         TableroPanel.setPreferredSize(new java.awt.Dimension(1510, 750));
 
+        graficoBarras.setMinimumSize(new java.awt.Dimension(730, 320));
+        graficoBarras.setPreferredSize(new java.awt.Dimension(730, 320));
+
         javax.swing.GroupLayout graficoBarrasLayout = new javax.swing.GroupLayout(graficoBarras);
         graficoBarras.setLayout(graficoBarrasLayout);
         graficoBarrasLayout.setHorizontalGroup(
             graficoBarrasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 781, Short.MAX_VALUE)
+            .addGap(0, 730, Short.MAX_VALUE)
         );
         graficoBarrasLayout.setVerticalGroup(
             graficoBarrasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 320, Short.MAX_VALUE)
         );
 
-        graficoLineal.setMinimumSize(new java.awt.Dimension(781, 250));
-        graficoLineal.setPreferredSize(new java.awt.Dimension(781, 250));
+        graficoLineal.setMinimumSize(new java.awt.Dimension(730, 220));
+        graficoLineal.setPreferredSize(new java.awt.Dimension(730, 220));
 
         javax.swing.GroupLayout graficoLinealLayout = new javax.swing.GroupLayout(graficoLineal);
         graficoLineal.setLayout(graficoLinealLayout);
         graficoLinealLayout.setHorizontalGroup(
             graficoLinealLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 730, Short.MAX_VALUE)
         );
         graficoLinealLayout.setVerticalGroup(
             graficoLinealLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 250, Short.MAX_VALUE)
+            .addGap(0, 220, Short.MAX_VALUE)
         );
 
-        graficoCircular.setMinimumSize(new java.awt.Dimension(400, 400));
-        graficoCircular.setPreferredSize(new java.awt.Dimension(400, 400));
+        graficoCircular.setMinimumSize(new java.awt.Dimension(350, 350));
+        graficoCircular.setPreferredSize(new java.awt.Dimension(350, 350));
 
         javax.swing.GroupLayout graficoCircularLayout = new javax.swing.GroupLayout(graficoCircular);
         graficoCircular.setLayout(graficoCircularLayout);
         graficoCircularLayout.setHorizontalGroup(
             graficoCircularLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 350, Short.MAX_VALUE)
         );
         graficoCircularLayout.setVerticalGroup(
             graficoCircularLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGap(0, 350, Short.MAX_VALUE)
         );
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
@@ -218,69 +222,70 @@ public class Principal extends javax.swing.JFrame {
         TableroPanel.setLayout(TableroPanelLayout);
         TableroPanelLayout.setHorizontalGroup(
             TableroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(TableroPanelLayout.createSequentialGroup()
-                .addContainerGap(30, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TableroPanelLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(TableroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TableroPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(441, 441, 441))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TableroPanelLayout.createSequentialGroup()
-                        .addGroup(TableroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(TableroPanelLayout.createSequentialGroup()
-                                .addGap(19, 19, 19)
-                                .addGroup(TableroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel3)
-                                    .addComponent(comboGenero, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel7)
-                                    .addComponent(comboAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jLabel4)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TableroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(TableroPanelLayout.createSequentialGroup()
-                                    .addGap(19, 19, 19)
-                                    .addGroup(TableroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jLabel2)
-                                        .addComponent(comboEnfermedad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addComponent(jLabel6)))
-                        .addGap(61, 61, 61)
+                    .addGroup(TableroPanelLayout.createSequentialGroup()
+                        .addGap(19, 19, 19)
                         .addGroup(TableroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(graficoLineal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(graficoBarras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(graficoCircular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(25, 25, 25))))
+                            .addComponent(jLabel3)
+                            .addComponent(comboGenero, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel7)
+                            .addComponent(comboAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel4)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TableroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(TableroPanelLayout.createSequentialGroup()
+                            .addGap(19, 19, 19)
+                            .addGroup(TableroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel2)
+                                .addComponent(comboEnfermedad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel6)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(TableroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(graficoLineal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(graficoBarras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(graficoCircular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TableroPanelLayout.createSequentialGroup()
+                .addContainerGap(609, Short.MAX_VALUE)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(607, 607, 607))
         );
         TableroPanelLayout.setVerticalGroup(
             TableroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TableroPanelLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
                 .addGroup(TableroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(TableroPanelLayout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(comboGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(comboAnio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(20, 20, 20)
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(comboEnfermedad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(TableroPanelLayout.createSequentialGroup()
-                        .addGap(46, 46, 46)
-                        .addComponent(graficoCircular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(TableroPanelLayout.createSequentialGroup()
-                        .addComponent(graficoBarras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(TableroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(TableroPanelLayout.createSequentialGroup()
+                                .addGap(93, 93, 93)
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(comboGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(comboAnio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(20, 20, 20)
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(comboEnfermedad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(TableroPanelLayout.createSequentialGroup()
+                                .addGap(21, 21, 21)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(graficoBarras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
-                        .addComponent(graficoLineal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(83, Short.MAX_VALUE))
+                        .addComponent(graficoLineal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(TableroPanelLayout.createSequentialGroup()
+                        .addGap(136, 136, 136)
+                        .addComponent(graficoCircular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(113, Short.MAX_VALUE))
         );
 
         jMenu1.setText("Archivo");
@@ -469,7 +474,7 @@ public class Principal extends javax.swing.JFrame {
                 false);
         ChartPanel graf = new ChartPanel(grafico_barras);
         graf.setMouseWheelEnabled(true);
-        graf.setPreferredSize(new Dimension(750,320));
+        graf.setPreferredSize(new Dimension(730,320));
         
         graficoBarras.setLayout(new BorderLayout());
         graficoBarras.add(graf,BorderLayout.NORTH);
@@ -494,8 +499,8 @@ public class Principal extends javax.swing.JFrame {
         );
         
         ChartPanel graf = new ChartPanel(grafico_circular);
-        graf.setPreferredSize(new Dimension(400, 400));
-        graf.setSize(new Dimension(400, 400));
+        graf.setPreferredSize(new Dimension(350, 320));
+        graf.setSize(new Dimension(350, 320));
         
         graficoCircular.setLayout(new BorderLayout());
         graficoCircular.add(graf, BorderLayout.NORTH);
@@ -522,7 +527,7 @@ public class Principal extends javax.swing.JFrame {
         
         ChartPanel graf = new ChartPanel(grafico_lineal);
         graf.setMouseWheelEnabled(true);
-        graf.setPreferredSize(new Dimension(7500,250));
+        graf.setPreferredSize(new Dimension(730,220));
         
         graficoLineal.setLayout(new BorderLayout());
         graficoLineal.add(graf,BorderLayout.NORTH);
