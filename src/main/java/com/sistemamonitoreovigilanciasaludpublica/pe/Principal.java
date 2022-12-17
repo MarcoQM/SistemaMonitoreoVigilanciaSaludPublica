@@ -4,7 +4,22 @@
  */
 package com.sistemamonitoreovigilanciasaludpublica.pe;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import javax.swing.table.DefaultTableModel;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
 
 /**
  *
@@ -12,6 +27,18 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Principal extends javax.swing.JFrame {
     DefaultTableModel defaultTableModel;
+    MortalityRateDAO mortalityRateDAO;
+    DefaultCategoryDataset datosBarras;
+    DefaultCategoryDataset datosLineal;
+    DefaultPieDataset datosCirculo;
+    Set<String> listaGeneros;
+    Set<String> listaEnfermedades;
+    Set<String> listaYears;
+    
+    ConnectionDefault cn = new ConnectionDefault();
+    Connection con;
+    PreparedStatement ps;
+    ResultSet rs;
    
     /**
      * Creates new form Principal
@@ -22,9 +49,8 @@ public class Principal extends javax.swing.JFrame {
         this.setLocationRelativeTo(Principal.this);
         //this.setResizable(false);
         //this.setExtendedState(Principal.MAXIMIZED_BOTH);
-        consultData();
-        
-
+        //consultData();
+        iniciar();
         
     }
 
@@ -37,20 +63,33 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        panelDatos = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblDatos = new javax.swing.JTable();
+        TableroPanel = new javax.swing.JPanel();
+        graficoBarras = new javax.swing.JPanel();
+        graficoLineal = new javax.swing.JPanel();
+        graficoCircular = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        comboGenero = new javax.swing.JComboBox<>();
+        comboEnfermedad = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        comboAnio = new javax.swing.JComboBox<>();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         menuSalir = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
-        jMenuItem4 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1522, 750));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel1.setText("Tasas de Mortalidad");
@@ -73,6 +112,177 @@ public class Principal extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblDatos);
 
+        javax.swing.GroupLayout panelDatosLayout = new javax.swing.GroupLayout(panelDatos);
+        panelDatos.setLayout(panelDatosLayout);
+        panelDatosLayout.setHorizontalGroup(
+            panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDatosLayout.createSequentialGroup()
+                .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelDatosLayout.createSequentialGroup()
+                        .addGap(451, 451, 451)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelDatosLayout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1158, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(28, Short.MAX_VALUE))
+        );
+        panelDatosLayout.setVerticalGroup(
+            panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDatosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 458, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17))
+        );
+
+        TableroPanel.setMinimumSize(new java.awt.Dimension(1510, 750));
+        TableroPanel.setPreferredSize(new java.awt.Dimension(1510, 750));
+
+        javax.swing.GroupLayout graficoBarrasLayout = new javax.swing.GroupLayout(graficoBarras);
+        graficoBarras.setLayout(graficoBarrasLayout);
+        graficoBarrasLayout.setHorizontalGroup(
+            graficoBarrasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 781, Short.MAX_VALUE)
+        );
+        graficoBarrasLayout.setVerticalGroup(
+            graficoBarrasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 320, Short.MAX_VALUE)
+        );
+
+        graficoLineal.setMinimumSize(new java.awt.Dimension(781, 250));
+        graficoLineal.setPreferredSize(new java.awt.Dimension(781, 250));
+
+        javax.swing.GroupLayout graficoLinealLayout = new javax.swing.GroupLayout(graficoLineal);
+        graficoLineal.setLayout(graficoLinealLayout);
+        graficoLinealLayout.setHorizontalGroup(
+            graficoLinealLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        graficoLinealLayout.setVerticalGroup(
+            graficoLinealLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 250, Short.MAX_VALUE)
+        );
+
+        graficoCircular.setMinimumSize(new java.awt.Dimension(400, 400));
+        graficoCircular.setPreferredSize(new java.awt.Dimension(400, 400));
+
+        javax.swing.GroupLayout graficoCircularLayout = new javax.swing.GroupLayout(graficoCircular);
+        graficoCircular.setLayout(graficoCircularLayout);
+        graficoCircularLayout.setHorizontalGroup(
+            graficoCircularLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        graficoCircularLayout.setVerticalGroup(
+            graficoCircularLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel5.setText("TABLERO DE MONITOREO");
+
+        comboGenero.setMaximumSize(new java.awt.Dimension(176, 22));
+        comboGenero.setPreferredSize(new java.awt.Dimension(176, 22));
+        comboGenero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboGeneroActionPerformed(evt);
+            }
+        });
+
+        comboEnfermedad.setMaximumSize(new java.awt.Dimension(176, 22));
+        comboEnfermedad.setPreferredSize(new java.awt.Dimension(176, 22));
+        comboEnfermedad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboEnfermedadActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Enfermedad");
+
+        jLabel3.setText("Genero");
+
+        jLabel4.setText("Grafico Barras");
+
+        jLabel6.setText("Grafico Lineal");
+
+        jLabel7.setText("Año");
+
+        comboAnio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018", "2019", "2020" }));
+        comboAnio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                comboAnioActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout TableroPanelLayout = new javax.swing.GroupLayout(TableroPanel);
+        TableroPanel.setLayout(TableroPanelLayout);
+        TableroPanelLayout.setHorizontalGroup(
+            TableroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(TableroPanelLayout.createSequentialGroup()
+                .addContainerGap(30, Short.MAX_VALUE)
+                .addGroup(TableroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TableroPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(441, 441, 441))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TableroPanelLayout.createSequentialGroup()
+                        .addGroup(TableroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(TableroPanelLayout.createSequentialGroup()
+                                .addGap(19, 19, 19)
+                                .addGroup(TableroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel3)
+                                    .addComponent(comboGenero, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel7)
+                                    .addComponent(comboAnio, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel4)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TableroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(TableroPanelLayout.createSequentialGroup()
+                                    .addGap(19, 19, 19)
+                                    .addGroup(TableroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jLabel2)
+                                        .addComponent(comboEnfermedad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jLabel6)))
+                        .addGap(61, 61, 61)
+                        .addGroup(TableroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(graficoLineal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(graficoBarras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(graficoCircular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(25, 25, 25))))
+        );
+        TableroPanelLayout.setVerticalGroup(
+            TableroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TableroPanelLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(TableroPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(TableroPanelLayout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(comboGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(comboAnio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(comboEnfermedad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(TableroPanelLayout.createSequentialGroup()
+                        .addGap(46, 46, 46)
+                        .addComponent(graficoCircular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(TableroPanelLayout.createSequentialGroup()
+                        .addComponent(graficoBarras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(graficoLineal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(83, Short.MAX_VALUE))
+        );
+
         jMenu1.setText("Archivo");
 
         menuSalir.setText("Salir");
@@ -85,31 +295,30 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Menu 1");
+        jMenu3.setText("Datos");
 
-        jMenuItem2.setText("Menu 1 Item");
+        jMenuItem1.setText("Visualizar Datos");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem1);
+
+        jMenuBar1.add(jMenu3);
+
+        jMenu2.setText("Herramientas");
+
+        jMenuItem2.setText("Tablero de Control");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);
             }
         });
         jMenu2.add(jMenuItem2);
+        jMenuItem2.getAccessibleContext().setAccessibleName("Tablero control");
 
         jMenuBar1.add(jMenu2);
-
-        jMenu3.setText("Menu 2");
-
-        jMenuItem3.setText("Menu2Item");
-        jMenu3.add(jMenuItem3);
-
-        jMenuBar1.add(jMenu3);
-
-        jMenu4.setText("Menu 3");
-
-        jMenuItem4.setText("Menu3Item");
-        jMenu4.add(jMenuItem4);
-
-        jMenuBar1.add(jMenu4);
 
         setJMenuBar(jMenuBar1);
 
@@ -118,23 +327,26 @@ public class Principal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 987, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(369, 369, 369)
-                        .addComponent(jLabel1)))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addGap(0, 161, Short.MAX_VALUE)
+                .addComponent(panelDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 161, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(TableroPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(jLabel1)
-                .addGap(28, 28, 28)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(panelDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 143, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(TableroPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         pack();
@@ -146,7 +358,30 @@ public class Principal extends javax.swing.JFrame {
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
+        panelDatos.setVisible(false);
+        TableroPanel.setVisible(true);
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void comboEnfermedadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboEnfermedadActionPerformed
+        // TODO add your handling code here:
+        graficarLineal();
+    }//GEN-LAST:event_comboEnfermedadActionPerformed
+
+    private void comboGeneroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboGeneroActionPerformed
+        // TODO add your handling code here:
+        graficarBarras();
+        graficarCirculo();
+    }//GEN-LAST:event_comboGeneroActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        panelDatos.setVisible(true);
+        TableroPanel.setVisible(false);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void comboAnioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboAnioActionPerformed
+        // TODO add your handling code here:
+        graficarBarras();
+    }//GEN-LAST:event_comboAnioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -183,38 +418,206 @@ public class Principal extends javax.swing.JFrame {
         });
     }
     
-    public void consultData() {
+    public int consultaData(String sql){
+        int result=0;
+        
+        try {
+            con = cn.openConnection();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            if(rs.next()){
+                result = rs.getInt("sumtotal");
+            }  
+            
+            con.close();
+            ps.close();
+            rs.close();
+        } catch (Exception e) {
+        }
+        
+        return result;
+    }
+    public void graficarBarras(){
+        DiseaseDAO dep = new DiseaseDAO();
+        List<Disease> listDiseases = new ArrayList<Disease>();
+        listDiseases = dep.all();
+        
+        datosBarras.clear();
+        int genderID=1;
+        String genero = comboGenero.getSelectedItem().toString();
+        if(genero.equalsIgnoreCase("Mujer")){genderID=2;}
+        String yearSelected = comboAnio.getSelectedItem().toString();
+         
+        int diseaseID=1;
+        String sql = "";
+        
+        for (int i=1; i<listDiseases.size(); i++) {
+            sql="SELECT SUM(number_death) as sumtotal FROM mortality_rates WHERE deparment_id=4 AND disease_id=+"+ diseaseID +" AND gender_id="+genderID+" and year="+yearSelected;
+            datosBarras.setValue(consultaData(sql), listDiseases.get(i).getName(), genero);
+            diseaseID++;
+        }
+        
+        JFreeChart grafico_barras = ChartFactory.createBarChart(
+                "Muertes por género en Arequipa segun el año",
+                "Enfermedades",
+                "Cantidad de fallecidos",
+                datosBarras,
+                PlotOrientation.VERTICAL,
+                false,
+                true,
+                false);
+        ChartPanel graf = new ChartPanel(grafico_barras);
+        graf.setMouseWheelEnabled(true);
+        graf.setPreferredSize(new Dimension(750,320));
+        
+        graficoBarras.setLayout(new BorderLayout());
+        graficoBarras.add(graf,BorderLayout.NORTH);
+        
+        revalidate();
+        repaint();
+    }
+    
+    public void graficarCirculo(){
+        datosCirculo.clear();
+        String sqlMujer = "SELECT SUM(number_death) as sumtotal FROM mortality_rates WHERE gender_id=2 and deparment_id=4";
+        String sqlHombre = "SELECT SUM(number_death) as sumtotal FROM mortality_rates WHERE gender_id=1 and deparment_id=4";
+        datosCirculo.setValue("Hombre", consultaData(sqlHombre));
+        datosCirculo.setValue("Mujer", consultaData(sqlMujer));
+        
+        JFreeChart grafico_circular = ChartFactory.createPieChart(
+                "Grafico circular muertes por genero en Arequipa",
+                datosCirculo,
+                true,
+                true,
+                false
+        );
+        
+        ChartPanel graf = new ChartPanel(grafico_circular);
+        graf.setPreferredSize(new Dimension(400, 400));
+        graf.setSize(new Dimension(400, 400));
+        
+        graficoCircular.setLayout(new BorderLayout());
+        graficoCircular.add(graf, BorderLayout.NORTH);
+    }
+    
+    public void graficarLineal(){
+        datosLineal.clear();
+        String enfermedad = comboEnfermedad.getSelectedItem().toString();
+        
+        for (MortalityRate a : mortalityRateDAO.all()) {
+            if (a.getDisease().equalsIgnoreCase(enfermedad)) {
+                if (a.getGender().equalsIgnoreCase("Hombre")) {
+                    datosLineal.setValue(a.getNumberDeath(), "Hombre", Integer.toString(a.getYear()));
+                } else if (a.getGender().equalsIgnoreCase("Mujer")) {
+                    datosLineal.setValue(a.getNumberDeath(), "Mujer", Integer.toString(a.getYear()));
+                }
+            }
+        }
+        
+        JFreeChart grafico_lineal = ChartFactory.createLineChart("Muertes por enfermedad por año en Arequipa",
+                "Año",
+                "Cantidad de fallecidos",
+                datosLineal);
+        
+        ChartPanel graf = new ChartPanel(grafico_lineal);
+        graf.setMouseWheelEnabled(true);
+        graf.setPreferredSize(new Dimension(7500,250));
+        
+        graficoLineal.setLayout(new BorderLayout());
+        graficoLineal.add(graf,BorderLayout.NORTH);
+        revalidate();
+        repaint();
+    }
+    
+//    public void consultData() {
+//        defaultTableModel = (DefaultTableModel) tblDatos.getModel();
+//        MortalityRateDAO mortalityRateDAO = new MortalityRateDAO();
+//        
+//        mortalityRateDAO.all().forEach(mr -> defaultTableModel.addRow(new Object[]{
+//            mr.getYear(), 
+//            mr.getDepartment(), 
+//            mr.getGender(), 
+//            mr.getDisease(), 
+//            mr.getNumberDeath(), 
+//            mr.getGrossRate(), 
+//            mr.getAdjusmentRate(),
+//            mr.getError(),
+//            mr.getLowerLimit(),
+//            mr.getUpperLimit(),
+//            mr.getCluster()}));
+//        
+//        tblDatos.setModel(defaultTableModel);
+//    }
+    public void iniciar(){
         defaultTableModel = (DefaultTableModel) tblDatos.getModel();
-        MortalityRateDAO mortalityRateDAO = new MortalityRateDAO();
+        mortalityRateDAO = new MortalityRateDAO();
+        datosBarras = new DefaultCategoryDataset();
+        datosLineal = new DefaultCategoryDataset();
+        datosCirculo = new DefaultPieDataset();
+        listaGeneros = new HashSet<>();
+        listaEnfermedades = new HashSet<>();
+        listaYears = new HashSet<>();
         
-        mortalityRateDAO.all().forEach(mr -> defaultTableModel.addRow(new Object[]{
-            mr.getYear(), 
-            mr.getDepartment(), 
-            mr.getGender(), 
-            mr.getDisease(), 
-            mr.getNumberDeath(), 
-            mr.getGrossRate(), 
-            mr.getAdjusmentRate(),
-            mr.getError(),
-            mr.getLowerLimit(),
-            mr.getUpperLimit(),
-            mr.getCluster()}));
-        
+        // Mostrar datos
+        for (MortalityRate a : mortalityRateDAO.all()) {
+            if (a.getDepartment().equalsIgnoreCase("Arequipa")) {
+                defaultTableModel.addRow(new Object[]{
+                    a.getYear(),
+                    a.getDepartment(),
+                    a.getGender(),
+                    a.getDisease(),
+                    a.getNumberDeath(),
+                    a.getGrossRate(),
+                    a.getAdjusmentRate(),
+                    a.getError(),
+                    a.getLowerLimit(),
+                    a.getUpperLimit(),
+                    a.getCluster()});
+                
+                listaGeneros.add(a.getGender());
+                listaEnfermedades.add(a.getDisease());
+                listaYears.add(a.getYear()+"");  
+            }
+        }
         tblDatos.setModel(defaultTableModel);
+
+        // Rellenar combos
+        listaGeneros.forEach(info -> comboGenero.addItem(info));
+        listaEnfermedades.forEach(info -> comboEnfermedad.addItem(info));
+        //listaYears.forEach(info -> comboAnio.addItem(info));
+        
+        panelDatos.setVisible(true);
+        TableroPanel.setVisible(false);
+        comboEnfermedad.setSize(176, 22);
+        comboGenero.setSize(176, 22);
+        comboAnio.setSize(176,22);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel TableroPanel;
+    private javax.swing.JComboBox<String> comboAnio;
+    private javax.swing.JComboBox<String> comboEnfermedad;
+    private javax.swing.JComboBox<String> comboGenero;
+    private javax.swing.JPanel graficoBarras;
+    private javax.swing.JPanel graficoCircular;
+    private javax.swing.JPanel graficoLineal;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JMenuItem menuSalir;
+    private javax.swing.JPanel panelDatos;
     private javax.swing.JTable tblDatos;
     // End of variables declaration//GEN-END:variables
 }
